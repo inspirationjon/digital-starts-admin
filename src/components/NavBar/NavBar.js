@@ -4,9 +4,9 @@ import './NavBar.scss'
 
 function NavBar() {
 	return (
-		<nav className='nav d-flex flex-column w-25 vh-100 border border-top-0 border-right-0'>
-			<ul className='nav__list list-group overflow-auto flex-grow-1 '>
-				<li className='nav__item list-group-item list-group-item-action p-0  border-top-0'>
+		<nav className='nav d-flex flex-column w-25  border border-top-0 h-100'>
+			<ul className='nav__list list-group list-group-flush overflow-auto flex-grow-1 '>
+				<li className='nav__item list-group-item  p-0        '>
 					<NavLink
 						className='nav__link d-block p-3 text-decoration-none'
 						to='/slider'
@@ -15,7 +15,7 @@ function NavBar() {
 						Slider
 					</NavLink>
 				</li>
-				<li className='nav__item list-group-item list-group-item-action p-0'>
+				<li className='nav__item list-group-item  p-0'>
 					<NavLink
 						className='nav__link d-block p-3 text-decoration-none'
 						to='/blog'
@@ -24,7 +24,7 @@ function NavBar() {
 						Blog
 					</NavLink>
 				</li>
-				<li className='nav__item list-group-item list-group-item-action p-0'>
+				<li className='nav__item list-group-item  p-0'>
 					<NavLink
 						className='nav__link d-block p-3 text-decoration-none'
 						to='/number'
@@ -33,7 +33,7 @@ function NavBar() {
 						Number
 					</NavLink>
 				</li>
-				<li className='nav__item list-group-item list-group-item-action p-0'>
+				<li className='nav__item list-group-item  p-0'>
 					<NavLink
 						className='nav__link d-block p-3 text-decoration-none'
 						to='/info'
@@ -42,7 +42,7 @@ function NavBar() {
 						Info
 					</NavLink>
 				</li>
-				<li className='nav__item list-group-item list-group-item-action border-top-0 p-0'>
+				<li className='nav__item list-group-item  border-top-0 p-0'>
 					<NavLink
 						className='nav__link d-block p-3 text-decoration-none'
 						to='/faq'
