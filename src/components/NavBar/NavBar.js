@@ -4,8 +4,8 @@ import './NavBar.scss'
 
 function NavBar() {
 	return (
-		<nav className='nav d-flex flex-column w-25  border border-top-0 h-100'>
-			<ul className='nav__list list-group list-group-flush overflow-auto flex-grow-1 '>
+		<nav className='nav d-flex flex-column w-25  '>
+			<ul className='nav__list list-group list-group-flush overflow-auto  border border-top-0 flex-grow-1'>
 				<li className='nav__item list-group-item  p-0        '>
 					<NavLink
 						className='nav__link d-block p-3 text-decoration-none'

@@ -14,9 +14,9 @@ function AuthenticatedApp() {
 		<>
 			<div className='site__wrapper h-100'>
 				<Header />
-				<div className='site__content d-flex h-100'>
+				<div className='site__content d-flex '>
 					<NavBar />
-					<div className='site__content-wrapper flex-grow-1 h-100 overflow-auto'>
+					<div className='site__content-wrapper flex-grow-1  overflow-auto'>
 						<Switch>
 							<Route path='/' component={Home} exact />
 							<Route path='/slider' component={Slider} exact />
