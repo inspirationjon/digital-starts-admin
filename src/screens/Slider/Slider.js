@@ -55,7 +55,7 @@ function Slider() {
 	return (
 		<section className='slider p-5'>
 			<form
-				className='slider-from w-50 mb-5 flex-column'
+				className='slider-from w-50 mb-5 d-flex flex-column'
 				onSubmit={handleSubmitForm}
 				method='POST'
 				autoComplete='off'>
@@ -70,6 +70,7 @@ function Slider() {
 						placeholder='Slide title'
 						id='slide_title'
 						name='slide_title'
+						required
 					/>
 				</div>
 				<div className='mb-3 '>
@@ -82,6 +83,7 @@ function Slider() {
 						placeholder='Slide subtitle'
 						id='slide_subtitle'
 						name='slide_subtitle'
+						required
 					/>
 				</div>
 				<div className='mb-3 '>
@@ -94,10 +96,11 @@ function Slider() {
 						placeholder='Slide subtitle'
 						id='slide_image'
 						name='slide_image'
+						required
 					/>
 				</div>
 				<button
-					className='btn btn-primary d-block ms-auto'
+					className='btn-block btn btn-success ms-auto'
 					type='submit'>
 					Submit
 				</button>
@@ -107,18 +110,18 @@ function Slider() {
 			<table className='numbers-table table table-striped w-50 m-4'>
 				<thead>
 					<tr>
-						<th scope='col'>ID</th>
-						<th scope='col'>Slide sarlavhasi</th>
-						<th scope='col'>Slide ta'rifi</th>
-						<th scope='col'>Slide rasmi</th>
-						<th scope='col'>Slideni o'chirish</th>
+						<th>ID</th>
+						<th>Slide sarlavhasi</th>
+						<th>Slide ta'rifi</th>
+						<th>Slide rasmi</th>
+						<th>Slideni o'chirish</th>
 					</tr>
 				</thead>
 				<tbody>
 					{isSuccess &&
 						slides?.map((slide, index) => (
 							<tr key={slide.slide_time}>
-								<td scope='row'>{index + 1}</td>
+								<td>{index + 1}</td>
 								<td>{slide.slide_title}</td>
 								<td>{slide.slide_title}</td>
 								<td>

@@ -40,7 +40,7 @@ function Admin() {
 		const formData = new FormData()
 		formData.append('user_id', evt.target.dataset.deletebtn)
 
-		fetch(process.env.REACT_APP_API_URL + '/faq', {
+		fetch(process.env.REACT_APP_API_URL + '/admin', {
 			method: 'DELETE',
 			headers: {
 				token,
@@ -51,7 +51,7 @@ function Admin() {
 	return (
 		<>
 			<form
-				className='faq-from w-50 m-5 flex-column'
+				className='faq-from w-50 m-5 d-flex flex-column'
 				onSubmit={handleSubmitAdmin}
 				autoComplete='off'>
 				<h2 className='h3 mb-3'>Admin Qo'shish</h2>
@@ -81,7 +81,9 @@ function Admin() {
 					/>
 				</div>
 
-				<button className='btn btn-primary ms-auto' type='submit'>
+				<button
+					className='btn-block btn btn-success ms-auto'
+					type='submit'>
 					Add
 				</button>
 			</form>
@@ -89,16 +91,16 @@ function Admin() {
 			<table className='numbers-table table table-striped w-50 m-4'>
 				<thead>
 					<tr>
-						<th scope='col'>ID</th>
-						<th scope='col'>Username</th>
-						<th scope='col'>Adminni o'chirish</th>
+						<th>ID</th>
+						<th>Username</th>
+						<th>Adminni o'chirish</th>
 					</tr>
 				</thead>
 				<tbody>
 					{isSuccess &&
 						admin?.map((item, index) => (
 							<tr key={Math.random()}>
-								<td scope='row'>{index + 1}</td>
+								<td>{index + 1}</td>
 								<td>{item.user_login}</td>
 								<td>
 									<button

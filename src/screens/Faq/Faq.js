@@ -51,7 +51,7 @@ function Faq() {
 	return (
 		<>
 			<form
-				className='faq-from w-50 m-5 flex-column'
+				className='faq-from w-50 m-5 d-flex flex-column'
 				onSubmit={handleSubmitFaq}
 				autoComplete='off'>
 				<h2 className='h3 mb-3'>FAQ Form</h2>
@@ -66,6 +66,7 @@ function Faq() {
 						placeholder='Question'
 						id='faq_question'
 						name='faq_question'
+						required
 					/>
 				</div>
 				<div className='mb-3 '>
@@ -78,10 +79,13 @@ function Faq() {
 						placeholder='Answer'
 						id='faq_answer'
 						name='faq_answer'
+						required
 					/>
 				</div>
 
-				<button className='btn btn-primary ms-auto' type='submit'>
+				<button
+					className='btn-block btn btn-success ms-auto'
+					type='submit'>
 					Submit
 				</button>
 			</form>
@@ -89,17 +93,17 @@ function Faq() {
 			<table className='numbers-table table table-striped w-50 m-4'>
 				<thead>
 					<tr>
-						<th scope='col'>ID</th>
-						<th scope='col'>Savol</th>
-						<th scope='col'>Javob</th>
-						<th scope='col'>FAQni o'chirish</th>
+						<th>ID</th>
+						<th>Savol</th>
+						<th>Javob</th>
+						<th>FAQni o'chirish</th>
 					</tr>
 				</thead>
 				<tbody>
 					{isSuccess &&
 						faq?.map((item, index) => (
 							<tr key={item.faq_created + Math.random()}>
-								<td scope='row'>{index + 1}</td>
+								<td>{index + 1}</td>
 								<td>{item.faq_question}</td>
 								<td>{item.faq_answer}</td>
 								<td>

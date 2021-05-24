@@ -79,6 +79,7 @@ function Info() {
 						placeholder='Address'
 						id='info_address'
 						name='info_address'
+						required
 					/>
 				</div>
 				<div className='mb-3 '>
@@ -92,6 +93,7 @@ function Info() {
 						placeholder='About'
 						id='info_subtitle'
 						name='info_subtitle'
+						required
 					/>
 				</div>
 				<div className='mb-3 '>
@@ -105,6 +107,7 @@ function Info() {
 						placeholder='Slide subtitle'
 						id='info_tel'
 						name='info_tel'
+						required
 					/>
 				</div>
 				<div className='mb-3 '>
@@ -118,6 +121,7 @@ function Info() {
 						placeholder='Slide subtitle'
 						id='info_email'
 						name='info_email'
+						required
 					/>
 				</div>
 				<div className='mb-3 '>
@@ -131,6 +135,7 @@ function Info() {
 						placeholder='Slide subtitle'
 						id='info_yt_link'
 						name='info_yt_link'
+						required
 					/>
 				</div>
 				<div className='mb-3 '>
@@ -144,6 +149,7 @@ function Info() {
 						placeholder='Slide subtitle'
 						id='info_google_link'
 						name='info_google_link'
+						required
 					/>
 				</div>
 				<button
