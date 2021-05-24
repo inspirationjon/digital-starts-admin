@@ -30,7 +30,7 @@ function NavBar() {
 						to='/number'
 						activeClassName='nav__link--active'
 						exact>
-						Number
+						Telefon raqamlar
 					</NavLink>
 				</li>
 				<li className='nav__item list-group-item  p-0'>
@@ -39,7 +39,7 @@ function NavBar() {
 						to='/info'
 						activeClassName='nav__link--active'
 						exact>
-						Info
+						Kompaniya Info
 					</NavLink>
 				</li>
 				<li className='nav__item list-group-item  border-top-0 p-0'>
@@ -49,6 +49,15 @@ function NavBar() {
 						activeClassName='nav__link--active'
 						exact>
 						FAQ
+					</NavLink>
+				</li>
+				<li className='nav__item list-group-item  border-top-0 p-0'>
+					<NavLink
+						className='nav__link d-block p-3 text-decoration-none'
+						to='/admin'
+						activeClassName='nav__link--active'
+						exact>
+						Adminlar
 					</NavLink>
 				</li>
 			</ul>
