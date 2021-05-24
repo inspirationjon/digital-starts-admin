@@ -1,0 +1,26 @@
+.table-controllers {
+    width: 65px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: auto;
+}
+
+.table-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background-color: #333;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:disabled {
+        opacity: 0.5;
+    }
+
+    &:hover {
+        opacity: 0.8;
+    }
+}

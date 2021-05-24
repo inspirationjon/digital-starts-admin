@@ -1,6 +1,5 @@
 import './App.scss'
 import { Switch, Route } from 'react-router-dom'
-import Home from './screens/Home/Home'
 import Slider from './screens/Slider/Slider'
 import Blog from './screens/Blog/Blog'
 import Number from './screens/Number/Number'

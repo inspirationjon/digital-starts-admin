@@ -9,7 +9,7 @@ function client(
 		method: data ? 'POST' : 'GET',
 		body: data ? JSON.stringify(data) : undefined,
 		headers: {
-			Cookie: token ? token : undefined,
+			token: token ? token : undefined,
 			'Content-Type': data ? 'application/json' : undefined,
 			...customHeaders,
 		},

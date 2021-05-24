@@ -9,8 +9,8 @@ function Slider() {
 
 	const {
 		data: slides,
-		isSuccess,
 		refetch,
+		isSuccess,
 	} = useQuery({
 		queryKey: 'slides',
 		queryFn: () => client('slide'),
@@ -51,8 +51,6 @@ function Slider() {
 		<section className='slider p-5'>
 			<form
 				className='slider-from w-50 mb-5 flex-column'
-				encType='multipart/form-data'
-				// action={process.env.REACT_APP_API_URL + '/slide'}
 				onSubmit={handleSubmitForm}
 				method='POST'>
 				<h2 className='h3 mt-0'>Slider Form</h2>
@@ -112,7 +110,7 @@ function Slider() {
 				</thead>
 				<tbody>
 					{isSuccess &&
-						slides.map((slide, index) => (
+						slides?.map((slide, index) => (
 							<tr key={slide.slide_time}>
 								<td scope='row'>{index + 1}</td>
 								<td>{slide.slide_title}</td>
@@ -134,7 +132,7 @@ function Slider() {
 									<button
 										className='btn btn-danger'
 										data-deletebtn={slide.slide_id}
-										onClick={handleDeleteSlide}>
+										onDoubleClick={handleDeleteSlide}>
 										o'chirish
 									</button>
 								</td>

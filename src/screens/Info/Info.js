@@ -1,15 +1,78 @@
 import React from 'react'
+import { useQuery } from 'react-query'
+import { client } from '../../utils/api-client'
+import useToken from '../../hooks/useToken'
 
 function Info() {
+	const [token] = useToken()
+
+	const { data: info } = useQuery({
+		queryKey: 'info',
+		queryFn: () => client('info'),
+	})
+
+	const info_address = React.useRef()
+	const info_subtitle = React.useRef()
+	const info_tel = React.useRef()
+	const info_email = React.useRef()
+	const info_yt_link = React.useRef()
+	const info_google_link = React.useRef()
+
+	React.useEffect(() => {
+		if (info) {
+			info_address.current.value = info.address
+			info_subtitle.current.value = info.about
+			info_tel.current.value = info.phone_number
+			info_email.current.value = info.email
+			info_yt_link.current.value = info.yt_video_link
+			info_google_link.current.value = info.google_form_link
+		}
+	}, [info])
+
+	const [response, setResponse] = React.useState()
+
+	function handleSubmitInfo(evt) {
+		evt.preventDefault()
+
+		const {
+			info_address,
+			info_subtitle,
+			info_tel,
+			info_email,
+			info_yt_link,
+			info_google_link,
+		} = evt.target.elements
+
+		const formData = new FormData()
+		formData.append('address', info_address.value.trim())
+		formData.append('about', info_subtitle.value.trim())
+		formData.append('phone_number', info_tel.value.trim())
+		formData.append('email', info_email.value.trim())
+		formData.append('yt_video_link', info_yt_link.value.trim())
+		formData.append('google_form_link', info_google_link.value.trim())
+
+		fetch(process.env.REACT_APP_API_URL + '/info', {
+			method: 'POST',
+			headers: { token },
+			body: formData,
+		})
+			.then((response) => response.json())
+			.then((response) => setResponse(response))
+	}
+
 	return (
 		<>
-			<form className='info-from w-50 m-5 flex-column'>
+			<form
+				className='info-from w-50 m-5 flex-column'
+				onSubmit={handleSubmitInfo}
+				method='POST'>
 				<h2 className='h3 mt-0'>Info Form</h2>
 				<div className='mb-3'>
-					<label for='info_address' class='form-label'>
+					<label htmlFor='info_address' className='form-label'>
 						Address
 					</label>
 					<input
+						ref={info_address}
 						className='info-form__unput form-control'
 						type='text'
 						placeholder='Address'
@@ -18,10 +81,11 @@ function Info() {
 					/>
 				</div>
 				<div className='mb-3 '>
-					<label for='info_subtitle' class='form-label'>
+					<label htmlFor='info_subtitle' className='form-label'>
 						About
 					</label>
 					<input
+						ref={info_subtitle}
 						className='info-form__unput form-control'
 						type='text'
 						placeholder='About'
@@ -30,10 +94,11 @@ function Info() {
 					/>
 				</div>
 				<div className='mb-3 '>
-					<label for='info_tel' class='form-label'>
+					<label htmlFor='info_tel' className='form-label'>
 						Phone number
 					</label>
 					<input
+						ref={info_tel}
 						className='info-form__unput form-control'
 						type='text'
 						placeholder='Slide subtitle'
@@ -42,10 +107,11 @@ function Info() {
 					/>
 				</div>
 				<div className='mb-3 '>
-					<label for='info_email' class='form-label'>
+					<label htmlFor='info_email' className='form-label'>
 						Email
 					</label>
 					<input
+						ref={info_email}
 						className='info-form__unput form-control'
 						type='text'
 						placeholder='Slide subtitle'
@@ -54,59 +120,55 @@ function Info() {
 					/>
 				</div>
 				<div className='mb-3 '>
-					<label for='info_tel' class='form-label'>
+					<label htmlFor='info_yt_link' className='form-label'>
 						You tube video Link
 					</label>
 					<input
+						ref={info_yt_link}
 						className='info-form__unput form-control'
 						type='text'
 						placeholder='Slide subtitle'
-						id='info_tel'
-						name='info_tel'
+						id='info_yt_link'
+						name='info_yt_link'
 					/>
 				</div>
 				<div className='mb-3 '>
-					<label for='info_from_link' class='form-label'>
+					<label htmlFor='info_google_link' className='form-label'>
 						Google form Link
 					</label>
 					<input
+						ref={info_google_link}
 						className='info-form__unput form-control'
 						type='text'
 						placeholder='Slide subtitle'
-						id='info_from_link'
-						name='info_from_link'
+						id='info_google_link'
+						name='info_google_link'
 					/>
 				</div>
-				<button className='btn btn-primary ms-auto' type='submit'>
-					Submit
+				<button
+					className='d-flex align-items-center justify-center btn btn-success ms-auto'
+					type='submit'>
+					{response ? (
+						<svg
+							width='18'
+							height='18'
+							xmlns='http://www.w3.org/2000/svg'
+							className='h-6 w-6'
+							fill='none'
+							viewBox='0 0 24 24'
+							stroke='currentColor'>
+							<path
+								strokeLinecap='round'
+								strokeLinejoin='round'
+								strokeWidth={2}
+								d='M5 13l4 4L19 7'
+							/>
+						</svg>
+					) : (
+						'Save'
+					)}
 				</button>
 			</form>
-
-			<table class='numbers-table table table-striped w-50 m-4'>
-				<thead>
-					<tr>
-						<th scope='col'>ID</th>
-						<th scope='col'>Sana</th>
-						<th scope='col'>Telefon Raqam</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th scope='row'>1</th>
-						<td>Mark</td>
-						<td className=' text-decoration-underline cursor-pointer'>
-							<a href='tel:+990902023'>+990902023</a>
-						</td>
-					</tr>
-					<tr>
-						<th scope='row'>1</th>
-						<td>Mark</td>
-						<td className='text-decoration-underline cursor-pointer'>
-							<a href='tel:+990902023'>+990902023</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
 		</>
 	)
 }
