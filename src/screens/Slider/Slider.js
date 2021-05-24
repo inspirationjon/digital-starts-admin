@@ -2,17 +2,59 @@ import React from 'react'
 import './Slider.scss'
 import { useQuery } from 'react-query'
 import { client } from '../../utils/api-client'
+import useToken from '../../hooks/useToken'
 
 function Slider() {
-	const { data: slides, isSuccess } = useQuery({
+	const [token] = useToken()
+
+	const {
+		data: slides,
+		isSuccess,
+		refetch,
+	} = useQuery({
 		queryKey: 'slides',
 		queryFn: () => client('slide'),
 	})
 
-	isSuccess && console.log(slides)
+	function handleSubmitForm(evt) {
+		evt.preventDefault()
+
+		const formData = new FormData()
+		const { slide_title, slide_subtitle, slide_image } = evt.target.elements
+		formData.append('slide_image', slide_image.files[0])
+		formData.append('slide_title', slide_title.value.trim())
+		formData.append('slide_subtitle', slide_subtitle.value.trim())
+
+		fetch(process.env.REACT_APP_API_URL + '/slide', {
+			method: 'POST',
+			headers: {
+				token,
+			},
+			body: formData,
+		}).then(() => refetch())
+	}
+
+	function handleDeleteSlide(evt) {
+		const formData = new FormData()
+		formData.append('slide_id', evt.target.dataset.deletebtn)
+
+		fetch(process.env.REACT_APP_API_URL + '/slide', {
+			method: 'DELETE',
+			headers: {
+				token,
+			},
+			body: formData,
+		}).then(() => refetch())
+	}
+
 	return (
 		<section className='slider p-5'>
-			<form className='slider-from w-50 mb-5 flex-column'>
+			<form
+				className='slider-from w-50 mb-5 flex-column'
+				encType='multipart/form-data'
+				// action={process.env.REACT_APP_API_URL + '/slide'}
+				onSubmit={handleSubmitForm}
+				method='POST'>
 				<h2 className='h3 mt-0'>Slider Form</h2>
 				<div className='mb-3 '>
 					<label htmlFor='slide_title' className='form-label'>
@@ -39,15 +81,15 @@ function Slider() {
 					/>
 				</div>
 				<div className='mb-3 '>
-					<label htmlFor='slide_file' className='form-label'>
+					<label htmlFor='slide_image' className='form-label'>
 						File
 					</label>
 					<input
 						className='slider-form__unput form-control'
 						type='file'
 						placeholder='Slide subtitle'
-						id='slide_file'
-						name='slide_file'
+						id='slide_image'
+						name='slide_image'
 					/>
 				</div>
 				<button
@@ -71,10 +113,8 @@ function Slider() {
 				<tbody>
 					{isSuccess &&
 						slides.map((slide, index) => (
-							<tr>
-								<th scope='row' key={slide.slide_time}>
-									{index + 1}
-								</th>
+							<tr key={slide.slide_time}>
+								<td scope='row'>{index + 1}</td>
 								<td>{slide.slide_title}</td>
 								<td>{slide.slide_title}</td>
 								<td>
@@ -91,7 +131,10 @@ function Slider() {
 									/>
 								</td>
 								<td className=' text-decoration-underline cursor-pointer'>
-									<button className='btn btn-danger'>
+									<button
+										className='btn btn-danger'
+										data-deletebtn={slide.slide_id}
+										onClick={handleDeleteSlide}>
 										o'chirish
 									</button>
 								</td>

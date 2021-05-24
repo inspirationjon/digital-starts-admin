@@ -18,8 +18,7 @@ function AuthenticatedApp() {
 					<NavBar />
 					<div className='site__content-wrapper flex-grow-1  overflow-auto'>
 						<Switch>
-							<Route path='/' component={Home} exact />
-							<Route path='/slider' component={Slider} exact />
+							<Route path='/' component={Slider} exact />
 							<Route path='/blog' component={Blog} exact />
 							<Route path='/number' component={Number} exact />
 							<Route path='/info' component={Info} exact />

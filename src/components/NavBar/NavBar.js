@@ -9,7 +9,7 @@ function NavBar() {
 				<li className='nav__item list-group-item  p-0        '>
 					<NavLink
 						className='nav__link d-block p-3 text-decoration-none'
-						to='/slider'
+						to='/'
 						activeClassName='nav__link--active'
 						exact>
 						Slider
