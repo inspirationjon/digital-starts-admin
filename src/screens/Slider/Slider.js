@@ -31,7 +31,12 @@ function Slider() {
 				token,
 			},
 			body: formData,
-		}).then(() => refetch())
+		}).then(() => {
+			refetch()
+			slide_title.value = null
+			slide_subtitle.value = null
+			slide_image.value = null
+		})
 	}
 
 	function handleDeleteSlide(evt) {
@@ -52,7 +57,8 @@ function Slider() {
 			<form
 				className='slider-from w-50 mb-5 flex-column'
 				onSubmit={handleSubmitForm}
-				method='POST'>
+				method='POST'
+				autoComplete='off'>
 				<h2 className='h3 mt-0'>Slider Form</h2>
 				<div className='mb-3 '>
 					<label htmlFor='slide_title' className='form-label'>

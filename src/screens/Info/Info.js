@@ -65,7 +65,8 @@ function Info() {
 			<form
 				className='info-from w-50 m-5 flex-column'
 				onSubmit={handleSubmitInfo}
-				method='POST'>
+				method='POST'
+				autoComplete='off'>
 				<h2 className='h3 mt-0'>Info Form</h2>
 				<div className='mb-3'>
 					<label htmlFor='info_address' className='form-label'>
