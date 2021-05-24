@@ -19,8 +19,7 @@ function NavBar() {
 					<NavLink
 						className='nav__link d-block p-3 text-decoration-none'
 						to='/blog'
-						activeClassName='nav__link--active'
-						exact>
+						activeClassName='nav__link--active'>
 						Blog
 					</NavLink>
 				</li>

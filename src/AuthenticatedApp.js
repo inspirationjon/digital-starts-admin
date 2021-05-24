@@ -19,7 +19,7 @@ function AuthenticatedApp() {
 					<div className='site__content-wrapper flex-grow-1  overflow-auto'>
 						<Switch>
 							<Route path='/' component={Slider} exact />
-							<Route path='/blog' component={Blog} exact />
+							<Route path='/blog' component={Blog} />
 							<Route path='/number' component={Number} exact />
 							<Route path='/info' component={Info} exact />
 							<Route path='/faq' component={Faq} exact />
