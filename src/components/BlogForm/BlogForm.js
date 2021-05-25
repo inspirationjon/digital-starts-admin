@@ -23,7 +23,7 @@ function BlogForm({ blogContent }) {
 		const formData = new FormData()
 		formData.append('blog_image', blog_image.files[0])
 		formData.append('blog_title', blog_title.value.trim())
-		formData.append('blog_content', JSON.stringify(blogContent?.ops))
+		formData.append('blog_content', blogContent)
 		formData.append('blog_author', blog_author.value.trim())
 		formData.append('blog_author_picture', blog_author_picture.files[0])
 		formData.append('blog_author_link', blog_author_link.value.trim())

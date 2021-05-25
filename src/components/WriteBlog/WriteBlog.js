@@ -36,7 +36,9 @@ function WriteBlog() {
 			quill.on('text-change', function () {
 				const text = quill.getText()
 				const content = quill.getContents()
-				setBlogContent(content)
+				console.log(quill.getText())
+				setBlogContent(JSON.stringify(content.ops))
+
 				counterRef.current.innerText = text.split(/\s+/).length - 1
 				setStatus(text?.split(/\s+/)?.length - 1)
 			})

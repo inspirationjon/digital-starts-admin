@@ -26,10 +26,10 @@ function NavBar() {
 				<li className='nav__item list-group-item  p-0'>
 					<NavLink
 						className='nav__link d-block p-3 text-decoration-none'
-						to='/number'
+						to='/team'
 						activeClassName='nav__link--active'
 						exact>
-						Telefon raqamlar
+						Jamoa a'zolari
 					</NavLink>
 				</li>
 				<li className='nav__item list-group-item  p-0'>

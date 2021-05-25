@@ -2,7 +2,7 @@ import './App.scss'
 import { Switch, Route } from 'react-router-dom'
 import Slider from './screens/Slider/Slider'
 import Blog from './screens/Blog/Blog'
-import Number from './screens/Number/Number'
+import Team from './components/Team/Team'
 import Info from './screens/Info/Info'
 import Faq from './screens/Faq/Faq'
 import NavBar from './components/NavBar/NavBar'
@@ -20,7 +20,7 @@ function AuthenticatedApp() {
 						<Switch>
 							<Route path='/' component={Slider} exact />
 							<Route path='/blog' component={Blog} />
-							<Route path='/number' component={Number} exact />
+							<Route path='/team' component={Team} exact />
 							<Route path='/info' component={Info} exact />
 							<Route path='/faq' component={Faq} exact />
 							<Route path='/admin' component={Admin} exact />
