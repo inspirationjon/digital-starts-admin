@@ -6,6 +6,7 @@ import 'quill/dist/quill.snow.css'
 function WriteBlog() {
 	const [status, setStatus] = React.useState('')
 	const [blogContent, setBlogContent] = React.useState(null)
+	const [blogText, setBlogText] = React.useState(null)
 	const toolbarOptions = [
 		['bold', 'italic', 'underline', 'strike'],
 		['blockquote', 'code-block'],
@@ -30,15 +31,13 @@ function WriteBlog() {
 			toolbar: toolbarOptions,
 		},
 	})
-
 	if (Quill && !quill) {
 		Quill.register('modules/counter', function (quill) {
 			quill.on('text-change', function () {
 				const text = quill.getText()
 				const content = quill.getContents()
-				console.log(quill.getText())
-				setBlogContent(JSON.stringify(content.ops))
-
+				setBlogContent(content.ops)
+				setBlogText(text)
 				counterRef.current.innerText = text.split(/\s+/).length - 1
 				setStatus(text?.split(/\s+/)?.length - 1)
 			})
@@ -68,7 +67,7 @@ function WriteBlog() {
 					</div>
 				</div>
 			</div>
-			<BlogForm blogContent={blogContent} />
+			<BlogForm blogContent={blogContent} blogText={blogText} />
 		</>
 	)
 }

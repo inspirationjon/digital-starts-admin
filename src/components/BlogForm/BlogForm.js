@@ -1,10 +1,39 @@
 import React from 'react'
 import useToken from '../../hooks/useToken'
 
-function BlogForm({ blogContent }) {
+function BlogForm({ blogContent, blogText }) {
 	const [token] = useToken()
 
-	console.log(blogContent)
+	const [todos, setTodos] = React.useState([])
+
+	const elTodoInput = React.useRef(null)
+
+	const tagsArr = todos.map((todo) => {
+		return todo.text
+	})
+
+	function handleAddTodo() {
+		if (!elTodoInput.current.value) {
+			return
+		}
+
+		let newTodo = {
+			id: todos.length,
+			text: elTodoInput.current.value.trim(),
+		}
+
+		todos.push(newTodo)
+		tagsArr.push(newTodo.text)
+		setTodos([...todos])
+		elTodoInput.current.value = null
+	}
+
+	function handleDeleteTodo(evt) {
+		const newTodos = [...todos]
+		newTodos.splice(evt.target.dataset.deleteid, 1)
+		setTodos(newTodos)
+	}
+
 	function handleSubmitBlog(evt) {
 		evt.preventDefault()
 
@@ -14,32 +43,38 @@ function BlogForm({ blogContent }) {
 			blog_author,
 			blog_author_picture,
 			blog_author_link,
-			blog_reading_time,
-			blog_like,
-			blog_tags,
-			blog_text,
+			blog_theme,
 		} = evt.target.elements
 
 		const formData = new FormData()
 		formData.append('blog_image', blog_image.files[0])
 		formData.append('blog_title', blog_title.value.trim())
-		formData.append('blog_content', blogContent)
+		formData.append('blog_content', JSON.stringify(blogContent))
 		formData.append('blog_author', blog_author.value.trim())
 		formData.append('blog_author_picture', blog_author_picture.files[0])
 		formData.append('blog_author_link', blog_author_link.value.trim())
-		formData.append('blog_reading_time', blog_reading_time.value.trim())
-		formData.append('blog_like', blog_like.value.trim())
-		formData.append('blog_tags', blog_tags.value.trim())
-		formData.append('blog_text', blog_text.value.trim())
+		formData.append('blog_tags', JSON.stringify(tagsArr))
+		formData.append('blog_text', blogText)
+		formData.append('blog_theme', blog_theme.value.trim())
 
-		fetch(process.env.REACT_APP_API_URL + '/blogs', {
+		var requestOptions = {
 			method: 'POST',
 			headers: {
 				token,
 			},
 			body: formData,
-		})
+		}
+
+		fetch(process.env.REACT_APP_API_URL + '/blogs', requestOptions)
+			.then((response) => response.text())
+			.then((result) => (result ? alert("Qo'shildi") : null))
+			.catch((error) => console.log('error', error))
+
+		blogContent = []
+		setTodos([])
+		evt.target.reset()
 	}
+
 	return (
 		<form
 			className='faq-from w-50 m-5 d-flex flex-column'
@@ -68,7 +103,7 @@ function BlogForm({ blogContent }) {
 				<input
 					className='faq-form__Input form-control'
 					type='text'
-					placeholder='Question'
+					placeholder='Sarlavha...'
 					id='blog_title'
 					name='blog_title'
 					required
@@ -82,7 +117,7 @@ function BlogForm({ blogContent }) {
 				<input
 					className='faq-form__unput form-control'
 					type='text'
-					placeholder='Answer'
+					placeholder='Ism'
 					id='blog_author'
 					name='blog_author'
 					required
@@ -95,7 +130,6 @@ function BlogForm({ blogContent }) {
 				<input
 					className='faq-form__unput form-control'
 					type='file'
-					placeholder='Answer'
 					id='blog_author_picture'
 					name='blog_author_picture'
 					required
@@ -108,63 +142,65 @@ function BlogForm({ blogContent }) {
 				<input
 					className='faq-form__unput form-control'
 					type='text'
-					placeholder='Answer'
+					placeholder='Link...'
 					id='blog_author_link'
 					name='blog_author_link'
 					required
 				/>
 			</div>
+
 			<div className='mb-3 '>
-				<label htmlFor='blog_reading_time' className='form-label'>
-					Blog O'qib Chiqish Vaqti
+				<label htmlFor='blog_theme' className='form-label'>
+					Maqola Yo'nalishi
 				</label>
 				<input
 					className='faq-form__unput form-control'
 					type='text'
-					placeholder='Answer'
-					id='blog_reading_time'
-					name='blog_reading_time'
-					required
-				/>
-			</div>
-			<div className='mb-3 '>
-				<label htmlFor='blog_like' className='form-label'>
-					Blog Like
-				</label>
-				<input
-					className='faq-form__unput form-control'
-					type='text'
-					placeholder='Answer'
-					id='blog_like'
-					name='blog_like'
+					placeholder="Yo'nalish nomi..."
+					id='blog_theme'
+					name='blog_theme'
 					required
 				/>
 			</div>
 			<div className='mb-3 '>
 				<label htmlFor='blog_tags' className='form-label'>
-					Blog Taglari
+					Maqola Taglari
 				</label>
-				<input
-					className='faq-form__unput form-control'
-					type='text'
-					placeholder='Answer'
-					id='blog_tags'
-					name='blog_tags'
-					required
-				/>
-			</div>
-			<div className='mb-3 '>
-				<label htmlFor='blog_text' className='form-label'>
-					Blog Matni
-				</label>
-				<input
-					className='faq-form__unput form-control'
-					type='text'
-					placeholder='Answer'
-					id='blog_text'
-					name='blog_text'
-					required
-				/>
+				<div className='d-flex'>
+					<input
+						className='faq-form__unput form-control'
+						type='text'
+						placeholder='#tag...'
+						id='blog_tags'
+						name='blog_tags'
+						ref={elTodoInput}
+						required
+					/>
+					<button
+						className='btn btn-primary ms-2'
+						onClick={handleAddTodo}
+						type='button'>
+						+
+					</button>
+				</div>
+
+				<ul className='list-unstyled mt-2'>
+					{todos.length > 0 &&
+						todos.map((todo, index) => (
+							<li
+								className='d-flex p-2 border-bottom'
+								key={index}>
+								{todo.text}
+								<button
+									className='ms-auto btn btn-danger'
+									data-deleteid={index}
+									type='button'
+									onClick={handleDeleteTodo}>
+									o'chirish
+								</button>
+							</li>
+						))}
+				</ul>
 			</div>
 
 			<button className='btn-block btn btn-success ms-auto' type='submit'>

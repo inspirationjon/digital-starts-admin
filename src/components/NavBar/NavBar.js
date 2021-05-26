@@ -4,8 +4,12 @@ import './NavBar.scss'
 
 function NavBar() {
 	return (
-		<nav className='nav d-flex flex-column w-25  '>
-			<ul className='nav__list list-group list-group-flush overflow-auto  border border-top-0 flex-grow-1'>
+		<nav
+			className='nav d-flex flex-column'
+			style={{ width: '700px !important;', maxWidth: '500px' }}>
+			<ul
+				className='nav__list list-group list-group-flush overflow-auto  border border-top-0 flex-grow-1'
+				style={{ width: '400px' }}>
 				<li className='nav__item list-group-item  p-0        '>
 					<NavLink
 						className='nav__link d-block p-3 text-decoration-none'
