@@ -95,6 +95,7 @@ function Team() {
 											'/images/' +
 											item.member_img
 										}
+										alt='Team member'
 										width='50'
 										height='50'
 									/>

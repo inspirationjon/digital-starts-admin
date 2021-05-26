@@ -170,11 +170,10 @@ function BlogForm({ blogContent, blogText }) {
 					<input
 						className='faq-form__unput form-control'
 						type='text'
-						placeholder='#tag...'
+						placeholder='tag...'
 						id='blog_tags'
 						name='blog_tags'
 						ref={elTodoInput}
-						required
 					/>
 					<button
 						className='btn btn-primary ms-2'

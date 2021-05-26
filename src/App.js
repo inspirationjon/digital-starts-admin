@@ -14,11 +14,11 @@ function App() {
 				token,
 			},
 		}).then((response) => {
-			if (response.status == 401) {
+			if (response.status === 401) {
 				setToken(false)
 			}
 		})
-	}, [token])
+	}, [token, setToken])
 
 	if (token) {
 		return <AuthenticatedApp />
