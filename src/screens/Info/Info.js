@@ -104,7 +104,7 @@ function Info() {
 						ref={info_tel}
 						className='info-form__unput form-control'
 						type='text'
-						placeholder='Slide subtitle'
+						placeholder='+998 (90) 123-45-67'
 						id='info_tel'
 						name='info_tel'
 						required
