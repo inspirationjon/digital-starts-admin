@@ -63,7 +63,7 @@ function Admin() {
 					<input
 						className='faq-form__unput form-control'
 						type='text'
-						placeholder='eshmat...'
+						placeholder='username'
 						id='admin_username'
 						name='admin_username'
 					/>
@@ -75,15 +75,13 @@ function Admin() {
 					<input
 						className='faq-form__unput form-control'
 						type='text'
-						placeholder='qwerty...'
+						placeholder='password'
 						id='admin_password'
 						name='admin_password'
 					/>
 				</div>
 
-				<button
-					className='btn-block btn btn-success ms-auto'
-					type='submit'>
+				<button className='btn-block btn btn-success ms-auto' type='submit'>
 					Add
 				</button>
 			</form>
